@@ -1,0 +1,25 @@
+<h1>Booking History</h1>
+<ul id="list"></ul>
+
+<script>
+fetch("http://localhost:5000/bookings")
+.then(res => res.json())
+.then(data => {
+    let list = document.getElementById("list");
+
+    data.forEach(b => {
+        let li = document.createElement("li");
+        li.innerText = `${b.pickup} → ${b.drop_location} | ${b.vehicle_type} | ₹${b.fare}`;
+        list.appendChild(li);
+    });
+});
+<button class="logout-btn" onclick="logoutUser()">
+    Logout
+</button>
+</script>
+
+
+
+
+
+

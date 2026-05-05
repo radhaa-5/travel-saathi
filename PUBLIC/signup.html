@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Signup - Travel Saathi</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>TRAVEL SAATHI</h1>
+
+<div class="box">
+
+<h2>Create Account</h2>
+
+<input type="text" id="name" placeholder="Full Name">
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="signupUser()">Signup</button>
+
+<p>
+Already have account?
+<a href="login.html">Login</a>
+</p>
+
+</div>
+
+<script>
+
+async function signupUser() {
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    // ✅ VALIDATION
+    if (!name || !email || !password) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    try {
+        const res = await fetch("/signup", {   // ✅ FIXED (no localhost)
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name,
+                email,
+                password
+            })
+        });
+
+        const data = await res.json();
+
+        alert(data.message);
+
+        if (data.success) {
+            window.location.href = "/login.html";
+        }
+
+    } catch (error) {
+        console.error(error);
+        alert("Server error. Try again.");
+    }
+}
+
+</script>
+
+</body>
+</html>

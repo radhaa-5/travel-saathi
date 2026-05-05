@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Login - Travel Saathi</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<h1>TRAVEL SAATHI</h1>
+
+<div class="box">
+
+<h2>Login</h2>
+
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="loginUser()">Login</button>
+
+<p>
+Don't have account?
+<a href="signup.html">Signup</a>
+</p>
+
+</div>
+
+<script>
+
+async function loginUser() {
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    // ✅ validation
+    if (!email || !password) {
+        alert("Please enter email and password");
+        return;
+    }
+
+    try {
+        const res = await fetch("/login", {   // ✅ FIXED (no localhost)
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email,
+                password
+            })
+        });
+
+        const data = await res.json();
+
+        alert(data.message);
+
+        if (data.success) {
+            localStorage.setItem("userEmail", email);
+            window.location.href = "/index.html";
+        }
+
+    } catch (err) {
+        console.error(err);
+        alert("Server error. Try again.");
+    }
+}
+
+</script>
+
+</body>
+</html>
