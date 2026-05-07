@@ -13,14 +13,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 /* ================= FRONTEND ================= */
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.join(__dirname, "../PUBLIC")));
 
 app.get("/", (req, res) => {
     res.redirect("/signup.html");
 });
 
 app.get("/chatbot", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/chatbot.html"));
+    res.sendFile(path.join(__dirname, "../PUBLIC/chatbot.html"));
 });
 
 /* ================= SIGNUP ================= */
