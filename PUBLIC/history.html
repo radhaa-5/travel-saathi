@@ -1,8 +1,13 @@
 <h1>Booking History</h1>
+
 <ul id="list"></ul>
 
+<button class="logout-btn" onclick="logoutUser()">
+    Logout
+</button>
+
 <script>
-fetch("http://localhost:5000/bookings")
+fetch("/bookings")
 .then(res => res.json())
 .then(data => {
     let list = document.getElementById("list");
@@ -13,13 +18,9 @@ fetch("http://localhost:5000/bookings")
         list.appendChild(li);
     });
 });
-<button class="logout-btn" onclick="logoutUser()">
-    Logout
-</button>
+
+function logoutUser() {
+    localStorage.clear();
+    window.location.href = "/login.html";
+}
 </script>
-
-
-
-
-
-
