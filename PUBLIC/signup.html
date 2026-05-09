@@ -42,7 +42,7 @@ async function signupUser() {
     }
 
     try {
-        const res = await fetch("/signup", {   // ✅ FIXED (no localhost)
+        const res = await fetch("/signup", {  
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
